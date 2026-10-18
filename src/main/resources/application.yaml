@@ -1,0 +1,36 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: ms-digitalfix-rabbitmq-admin
+
+  rabbitmq:
+    # Los dos nodos del cluster: la administracion se replica entre ambos, asi
+    # que declarar una cola contra cualquiera la deja visible en los dos.
+    addresses: ${RABBIT_ADDRESSES:localhost:5672,localhost:5673}
+    # No se usa guest: RabbitMQ lo bloquea para cualquier conexion que no venga
+    # del propio broker, asi que desde otro host o contenedor nunca conecta.
+    username: ${RABBIT_USER:digitalfix}
+    password: ${RABBIT_PASS:digitalfix}
+    virtual-host: /
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://login.microsoftonline.com/a6a0c27e-18a7-4209-bd1b-32338be5cb66/v2.0
+
+digitalfix:
+  security:
+    audiences:
+      - 8e5e408b-c101-4bc1-a5d3-01f702720462
+      - api://8e5e408b-c101-4bc1-a5d3-01f702720462
+  cors:
+    allowed-origins:
+      - http://localhost:8080
+      - http://localhost:4200
+
+logging:
+  level:
+    cl.duoc.ms_digitalfix_rabbitmq_admin: INFO
