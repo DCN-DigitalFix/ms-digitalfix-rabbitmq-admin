@@ -11,17 +11,17 @@ sistema se pueda operar sin entrar a la Management UI ni ejecutar
 
 | Método | Ruta | Qué hace |
 |---|---|---|
-| POST | `/api/queues` | Declara una cola |
-| GET | `/api/queues/{nombre}` | Mensajes pendientes y consumidores conectados |
-| DELETE | `/api/queues/{nombre}` | Elimina la cola y sus mensajes |
-| DELETE | `/api/queues/{nombre}/mensajes` | Vacía la cola sin eliminarla |
-| POST | `/api/exchanges` | Declara un exchange |
-| DELETE | `/api/exchanges/{nombre}` | Elimina el exchange y sus bindings |
-| POST | `/api/bindings` | Enlaza un exchange con una cola |
-| DELETE | `/api/bindings` | Deshace el enlace |
+| POST | `/api/v1/queues` | Declara una cola |
+| GET | `/api/v1/queues/{nombre}` | Mensajes pendientes y consumidores conectados |
+| DELETE | `/api/v1/queues/{nombre}` | Elimina la cola y sus mensajes |
+| DELETE | `/api/v1/queues/{nombre}/mensajes` | Vacía la cola sin eliminarla |
+| POST | `/api/v1/exchanges` | Declara un exchange |
+| DELETE | `/api/v1/exchanges/{nombre}` | Elimina el exchange y sus bindings |
+| POST | `/api/v1/bindings` | Enlaza un exchange con una cola |
+| DELETE | `/api/v1/bindings` | Deshace el enlace |
 | GET | `/api/health` | Sonda de estado |
 
-Vaciar una cola es `DELETE` sobre `/api/queues/{nombre}/mensajes` y no un
+Vaciar una cola es `DELETE` sobre `/api/v1/queues/{nombre}/mensajes` y no un
 verbo propio: los mensajes son un subrecurso de la cola, y borrarlos es
 exactamente lo que `DELETE` significa.
 
@@ -40,7 +40,7 @@ cumplir.
 ### Crear una cola con DLQ
 
 ```
-POST /api/queues
+POST /api/v1/queues
 Content-Type: application/json
 
 {
@@ -62,7 +62,7 @@ Content-Type: application/json
 ### Crear un exchange
 
 ```
-POST /api/exchanges
+POST /api/v1/exchanges
 
 { "nombre": "cmd.topic", "tipo": "TOPIC", "durable": true }
 ```
@@ -70,7 +70,7 @@ POST /api/exchanges
 ### Enlazarlos
 
 ```
-POST /api/bindings
+POST /api/v1/bindings
 
 { "exchange": "cmd.topic", "cola": "q.cmd.email", "routingKey": "email.*" }
 ```
@@ -78,7 +78,7 @@ POST /api/bindings
 ### Consultar una cola
 
 ```
-GET /api/queues/q.cmd.email
+GET /api/v1/queues/q.cmd.email
 ```
 
 ```json
@@ -112,7 +112,7 @@ Una petición inválida devuelve 400 con un detalle por campo:
   "status": 400,
   "error": "Bad Request",
   "message": "La peticion tiene campos invalidos",
-  "path": "/api/queues",
+  "path": "/api/v1/queues",
   "detalles": [
     "nombre: el nombre de la cola es obligatorio"
   ]

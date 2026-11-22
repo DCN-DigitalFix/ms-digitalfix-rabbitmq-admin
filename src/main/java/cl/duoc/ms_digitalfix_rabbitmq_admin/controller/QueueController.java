@@ -21,10 +21,10 @@ import jakarta.validation.Valid;
 /**
  * Administracion de colas.
  *
- * El recurso es /api/queues y los verbos siguen su significado habitual:
+ * El recurso es /api/v1/queues y los verbos siguen su significado habitual:
  * POST crea, GET consulta, DELETE elimina. Los mensajes de una cola se tratan
  * como un subrecurso, de modo que vaciarla sin borrarla es DELETE sobre
- * /api/queues/{nombre}/mensajes y no un verbo inventado.
+ * /api/v1/queues/{nombre}/mensajes y no un verbo inventado.
  *
  * El controlador no conoce RabbitMQ: delega todo en RabbitAdminService.
  *
@@ -33,7 +33,7 @@ import jakarta.validation.Valid;
  * de mensajeria es la operacion mas sensible del sistema.
  */
 @RestController
-@RequestMapping("/api/queues")
+@RequestMapping("/api/v1/queues")
 public class QueueController {
 
     private final RabbitAdminService adminService;
@@ -42,7 +42,7 @@ public class QueueController {
         this.adminService = adminService;
     }
 
-    /** POST /api/queues */
+    /** POST /api/v1/queues */
     @PostMapping
     @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<OperacionResponse> crear(@Valid @RequestBody CrearQueueRequest request) {
@@ -52,14 +52,14 @@ public class QueueController {
                 OperacionResponse.creado(nombre, "Cola declarada en el broker"));
     }
 
-    /** GET /api/queues/{nombre} */
+    /** GET /api/v1/queues/{nombre} */
     @GetMapping("/{nombre}")
     @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<QueueInfoResponse> obtener(@PathVariable String nombre) {
         return ResponseEntity.ok(adminService.obtenerCola(nombre));
     }
 
-    /** DELETE /api/queues/{nombre} */
+    /** DELETE /api/v1/queues/{nombre} */
     @DeleteMapping("/{nombre}")
     @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<OperacionResponse> eliminar(@PathVariable String nombre) {
@@ -69,7 +69,7 @@ public class QueueController {
                 OperacionResponse.eliminado(nombre, "Cola eliminada junto con sus mensajes"));
     }
 
-    /** DELETE /api/queues/{nombre}/mensajes */
+    /** DELETE /api/v1/queues/{nombre}/mensajes */
     @DeleteMapping("/{nombre}/mensajes")
     @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<OperacionResponse> purgar(@PathVariable String nombre) {

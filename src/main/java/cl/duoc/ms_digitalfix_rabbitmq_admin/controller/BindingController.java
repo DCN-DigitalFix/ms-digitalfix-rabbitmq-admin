@@ -27,7 +27,7 @@ import jakarta.validation.Valid;
  * de mensajeria es la operacion mas sensible del sistema.
  */
 @RestController
-@RequestMapping("/api/bindings")
+@RequestMapping("/api/v1/bindings")
 public class BindingController {
 
     private final RabbitAdminService adminService;
@@ -36,7 +36,7 @@ public class BindingController {
         this.adminService = adminService;
     }
 
-    /** POST /api/bindings */
+    /** POST /api/v1/bindings */
     @PostMapping
     @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<OperacionResponse> crear(@Valid @RequestBody CrearBindingRequest request) {
@@ -47,7 +47,7 @@ public class BindingController {
                 descripcion, "Binding con routing key '" + request.routingKeyODefecto() + "'"));
     }
 
-    /** DELETE /api/bindings */
+    /** DELETE /api/v1/bindings */
     @DeleteMapping
     @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<OperacionResponse> eliminar(@Valid @RequestBody CrearBindingRequest request) {
