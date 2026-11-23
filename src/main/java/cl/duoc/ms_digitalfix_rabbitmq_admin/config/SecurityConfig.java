@@ -2,6 +2,7 @@ package cl.duoc.ms_digitalfix_rabbitmq_admin.config;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +34,7 @@ public class SecurityConfig {
     private final SecurityProperties properties;
     private final String issuerUri;
 
+    @Autowired
     public SecurityConfig(
             SecurityProperties properties,
             @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}") String issuerUri) {

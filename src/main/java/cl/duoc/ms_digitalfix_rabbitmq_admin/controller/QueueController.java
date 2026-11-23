@@ -1,5 +1,6 @@
 package cl.duoc.ms_digitalfix_rabbitmq_admin.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,7 @@ public class QueueController {
 
     private final RabbitAdminService adminService;
 
+    @Autowired
     public QueueController(RabbitAdminService adminService) {
         this.adminService = adminService;
     }

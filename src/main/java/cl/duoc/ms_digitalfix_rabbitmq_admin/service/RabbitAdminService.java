@@ -15,6 +15,7 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueInformation;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cl.duoc.ms_digitalfix_rabbitmq_admin.dto.CrearBindingRequest;
@@ -43,6 +44,7 @@ public class RabbitAdminService {
 
     private final RabbitAdmin rabbitAdmin;
 
+    @Autowired
     public RabbitAdminService(RabbitAdmin rabbitAdmin) {
         this.rabbitAdmin = rabbitAdmin;
     }
