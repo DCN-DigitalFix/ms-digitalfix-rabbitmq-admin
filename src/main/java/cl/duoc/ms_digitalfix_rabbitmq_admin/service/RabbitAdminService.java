@@ -42,12 +42,8 @@ public class RabbitAdminService {
 
     private static final Logger log = LoggerFactory.getLogger(RabbitAdminService.class);
 
-    private final RabbitAdmin rabbitAdmin;
-
     @Autowired
-    public RabbitAdminService(RabbitAdmin rabbitAdmin) {
-        this.rabbitAdmin = rabbitAdmin;
-    }
+    private RabbitAdmin rabbitAdmin;
 
     // -----------------------------------------------------------------------
     // Colas

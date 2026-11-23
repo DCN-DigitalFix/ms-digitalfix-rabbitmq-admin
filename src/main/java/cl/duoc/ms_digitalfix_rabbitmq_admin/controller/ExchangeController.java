@@ -32,12 +32,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/v1/exchanges")
 public class ExchangeController {
 
-    private final RabbitAdminService adminService;
-
     @Autowired
-    public ExchangeController(RabbitAdminService adminService) {
-        this.adminService = adminService;
-    }
+    private RabbitAdminService adminService;
 
     /** POST /api/v1/exchanges */
     @PostMapping

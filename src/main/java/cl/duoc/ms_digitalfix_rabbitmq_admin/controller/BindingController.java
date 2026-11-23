@@ -31,12 +31,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/v1/bindings")
 public class BindingController {
 
-    private final RabbitAdminService adminService;
-
     @Autowired
-    public BindingController(RabbitAdminService adminService) {
-        this.adminService = adminService;
-    }
+    private RabbitAdminService adminService;
 
     /** POST /api/v1/bindings */
     @PostMapping

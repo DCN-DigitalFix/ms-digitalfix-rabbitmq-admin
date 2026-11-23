@@ -37,12 +37,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/v1/queues")
 public class QueueController {
 
-    private final RabbitAdminService adminService;
-
     @Autowired
-    public QueueController(RabbitAdminService adminService) {
-        this.adminService = adminService;
-    }
+    private RabbitAdminService adminService;
 
     /** POST /api/v1/queues */
     @PostMapping
