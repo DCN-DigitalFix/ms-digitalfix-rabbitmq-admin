@@ -28,7 +28,7 @@ import jakarta.validation.Valid;
  * de mensajeria es la operacion mas sensible del sistema.
  */
 @RestController
-@RequestMapping("/api/v1/exchanges")
+@RequestMapping("/api/v1/rabbitmq/exchanges")
 public class ExchangeController {
 
     private final RabbitAdminService adminService;
@@ -37,7 +37,7 @@ public class ExchangeController {
         this.adminService = adminService;
     }
 
-    /** POST /api/v1/exchanges */
+    /** POST /api/v1/rabbitmq/exchanges */
     @PostMapping
     @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<OperacionResponse> crear(@Valid @RequestBody CrearExchangeRequest request) {
@@ -47,7 +47,7 @@ public class ExchangeController {
                 nombre, "Exchange de tipo " + request.tipo() + " declarado en el broker"));
     }
 
-    /** DELETE /api/v1/exchanges/{nombre} */
+    /** DELETE /api/v1/rabbitmq/exchanges/{nombre} */
     @DeleteMapping("/{nombre}")
     @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<OperacionResponse> eliminar(@PathVariable String nombre) {
