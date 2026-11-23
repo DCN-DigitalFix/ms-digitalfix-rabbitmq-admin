@@ -19,13 +19,13 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: https://login.microsoftonline.com/a6a0c27e-18a7-4209-bd1b-32338be5cb66/v2.0
+          issuer-uri: https://login.microsoftonline.com/6e49fdba-8435-41ac-8074-7b1a04cfd543/v2.0
 
 digitalfix:
   security:
     audiences:
-      - 8e5e408b-c101-4bc1-a5d3-01f702720462
-      - api://8e5e408b-c101-4bc1-a5d3-01f702720462
+      - 13a645a9-ea0e-498e-96b8-55a3d56f10eb
+      - api://13a645a9-ea0e-498e-96b8-55a3d56f10eb
   cors:
     allowed-origins:
       - http://localhost:8080
